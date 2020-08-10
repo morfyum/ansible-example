@@ -1,5 +1,5 @@
 
-# 1. Install python3 tools for Ansible because Ubuntu ansible version is so old.
+### 1. Install python3 tools for Ansible because Ubuntu ansible version is so old.
 sudo apt install python3 python3-simplejson python3-apt python3-pip python3-virtualenv
 
 # 2. Install Ansible tools with pip
