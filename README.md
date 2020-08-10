@@ -1,28 +1,39 @@
-
 ### 1. Install python3 tools for Ansible because Ubuntu ansible version is so old.
+
+```
 sudo apt install python3 python3-simplejson python3-apt python3-pip python3-virtualenv
+```
 
-# 2. Install Ansible tools with pip
+### 2. Createa python pip virtaulenv for ansible
+
+```
 python3 -m virtualenv ansible		# Create a virtualenv if one does not already exist
-source ansible/bin/activate			# Activate the virtual environment
-pip3 install ansible				# pip (python) or pip3 (python3) install
-deactivate 							# Exit from (source ansible/bin/activate)
+source ansible/bin/activate		# Activate the virtual environment
+pip3 install ansible			# pip (python) or pip3 (python3) install
+```
+`deactivate` 				# Exit from (source ansible/bin/activate)
 
-# 3. Ansible need sudo privilege
-# NOPASSWD for sudo or create a user
-# cat /etc/sudoers
-# and add to new user line with NOPASSWD
-# %ansibleuser ALL=(ALL:ALL) NOPASSWD: ALL
-sudo visudo 
-	#We need to edit the line
-	%sudo   ALL=(ALL:ALL) ALL
-	and look like this:
-	%sudo  ALL=(ALL:ALL) NOPASSWD: ALL
+### 3. Ansible need sudo privilege!
+Option 1: NOPASSWD for sudo
+Option 2: Create a new user with sudo, and give NOPASSWD for this user only! (Better option)
+`sudo cat /etc/sudoers`
 
-# 4. Recommended 1 ssh-key per environment
-ssh-keygen -t rsa -b 4096
-ssh-copy-id -i ~/.ssh/mykey user@host
+`sudo visudo`
+Example for Option 1:
+```
+%sudo   ALL=(ALL:ALL) ALL
+and look like this:
+%sudo  ALL=(ALL:ALL) NOPASSWD: ALL
+```
+Example for Option 2:
+Create a new user `ansibleuser` and add this line to `/etc/sudoers`
+`%ansibleuser ALL=(ALL:ALL) NOPASSWD: ALL`
 
+### 4. Recommended 1 ssh-key per environment!
+```ssh-keygen -t rsa -b 4096```
+```ssh-copy-id -i ~/.ssh/mykey user@host```
+
+```
 # Create inventory.yml
 all:
   children:
@@ -32,27 +43,34 @@ all:
 		  ansible_host: 10.1.1.233
 		  ansible_port: 22
 		  ansible_user: mars
+```
 
-# Create Roles
+### Create Roles
 
 
-# Create playbook.yml
+### Create playbook.yml
+```
 - name ping server
   hosts: servers		# is a "servers" line in inventory.yml?
   tasks:
     - name: ping server
 	  ping:
-  
-# Role files
-# https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html
+```
+
+### Role files
+  LINK
+    - https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html
 
 
-# Run playbook on inventory servers 
+### Run playbook on inventory servers 
+```
 ansible-playbook -i inventory.yml playbook.yml
+```
 
-
-# MULTILINE ROW REPLACE
-LINK: https://www.middlewareinventory.com/blog/ansible-lineinfile-multiple-lines-replace-multiple-lines/
+### MULTILINE ROW REPLACE
+  LINK:
+    - https://www.middlewareinventory.com/blog/ansible-lineinfile-multiple-lines-replace-multiple-lines/
+```
 ---
   - name: Examples of lineinfile
     hosts: web
@@ -74,3 +92,4 @@ LINK: https://www.middlewareinventory.com/blog/ansible-lineinfile-multiple-lines
          - { From: 'ServerAdmin aksarav@middlewareinventory.com', To: 'ServerAdmin aksarav@devopsjunction.com'}
          - { From: '^LogLevel .*', To: 'LogLevel debug'}
          - { From: '^DocumentRoot .*', To: 'DocumentRoot "/var/www/devopsjunction"'}
+```
