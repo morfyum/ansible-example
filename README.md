@@ -11,12 +11,15 @@ python3 -m virtualenv ansible		# Create a virtualenv if one does not already exi
 source ansible/bin/activate		# Activate the virtual environment
 pip3 install ansible			# pip (python) or pip3 (python3) install
 ```
-```deactivate 				# Exit from source ansible/bin/activate```
+```
+deactivate 				# Exit from source ansible/bin/activate
+```
 
 ### 3. Ansible need sudo privilege!
 Option 1: NOPASSWD for sudo
 Option 2: Create a new user with sudo, and give NOPASSWD for this user only! (Better option)
-`sudo cat /etc/sudoers`
+
+```sudo cat /etc/sudoers```
 
 `sudo visudo`
 Example for Option 1:
