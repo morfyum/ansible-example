@@ -1,0 +1,14 @@
+---
+
+- name: 'multiline modify: vimrc'
+  become: true
+  lineinfile:
+    path: /etc/vim/vimrc
+    regexp: '{{item.From}}'
+    line: '{{item.To}}'
+    state: present
+    insertafter: EOF
+  with_items:
+    - { From: 'colorscheme desert', To: 'colorscheme desert' }
+    - { From: 'set number', To: 'set number' }
+    - { From: 'set tabstop=4', To: 'set tabstop=4' }

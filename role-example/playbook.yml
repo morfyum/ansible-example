@@ -1,0 +1,22 @@
+- name: "PING SERVERS"
+  hosts: servers  # Az inventory.yml-ben megadott név
+  tasks:
+    - name: "Ping servers"
+      ping:
+- name: "PING CLIENTS"
+  hosts: clients  # Az inventory.yml-ben megadott név
+  tasks:
+    - name: "Ping clients"
+      ping:
+
+
+- name: "SET DEFAULTS ON SERVERS"
+  hosts: servers
+  tasks:
+    #- include: ./roles/defaults/main.yml
+    - include: ./roles/defaults/vimrc.yml
+
+- name: "SET DEFAULTS ON CLIENT"
+  hosts: clients
+  tasks: 
+    - include: ./roles/defaults/main.yml

@@ -1,0 +1,14 @@
+all:
+  children:
+    servers:   # tetszőleges
+      hosts:
+        test-servers:   # tetszőleges
+          ansible_host: 192.168.1.200
+          ansible_port: 22
+          ansible_user: ansibleman
+    clients:   # tetszőleges
+      hosts:
+        test-clients:   # tetszőleges
+          ansible_host: 192.168.1.199
+          ansible_port: 22
+          ansible_user: mars 

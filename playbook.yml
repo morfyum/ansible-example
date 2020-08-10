@@ -1,0 +1,47 @@
+- name: "PING SERVERS"
+  hosts: servers # Az inventory.yml-ben megadott név
+  tasks:
+    - name: "Ping servers"
+      ping:
+
+- name: "MANAGE PACKAGES"
+  hosts: servers
+  tasks:
+    - name: "Install packages"
+      become: true
+      apt:
+        name:
+          - tree
+          - mc
+          - apt-transport-https
+        state: present
+        force_apt_get: true
+
+- name: "UPDATE FILES"
+  hosts: servers
+  tasks:
+    - name: "Update /etc/bash.bashrc: set promt color: default"
+      become: true
+      lineinfile:
+      path: /etc/bash.bashrc
+      regexp: "force_color_prompt="
+      line: "force_color_prompt=yes"
+      state: present
+      insertafter: EOF
+    - name: "Update /etc/vim/vimrc: colorscheme ron"
+      become: true
+      lineinfile:
+      path: /etc/vim/vimrc
+      regexp: "colorscheme desert"
+      line: "colorscheme desert"
+      state: present
+      insertafter: EOF
+
+- name: "Insert/Replace file: /opt/info-ansible"
+  become: true
+  copy:
+    content: "This Server managed by Ansible"
+    dest: /opt/info-ansible
+    owner: "root"
+    group: "root"
+    mode: "0644"

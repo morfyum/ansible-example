@@ -1,0 +1,8 @@
+all:
+  children:
+    servers: # Tetszőlegesen választható elnevezés
+      hosts:
+        testservers:
+          ansible_host: 192.168.1.200
+          ansible_port: 22
+          ansible_user: bill
