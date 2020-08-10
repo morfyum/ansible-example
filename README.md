@@ -19,22 +19,31 @@ deactivate 				# Exit from source ansible/bin/activate
 Option 1: NOPASSWD for sudo
 Option 2: Create a new user with sudo, and give NOPASSWD for this user only! (Better option)
 
-```sudo cat /etc/sudoers```
+```
+sudo cat /etc/sudoers
+```
+```
+sudo visudo
+```
 
-`sudo visudo`
 Example for Option 1:
 ```
 %sudo   ALL=(ALL:ALL) ALL
 and look like this:
 %sudo  ALL=(ALL:ALL) NOPASSWD: ALL
 ```
+
 Example for Option 2:
 Create a new user `ansibleuser` and add this line to `/etc/sudoers`
 `%ansibleuser ALL=(ALL:ALL) NOPASSWD: ALL`
 
 ### 4. Recommended 1 ssh-key per environment!
-```ssh-keygen -t rsa -b 4096```
-```ssh-copy-id -i ~/.ssh/mykey user@host```
+```
+ssh-keygen -t rsa -b 4096
+```
+```
+ssh-copy-id -i ~/.ssh/mykey user@host
+```
 
 ```
 # Create inventory.yml
@@ -61,8 +70,7 @@ all:
 ```
 
 ### Role files
-  LINK
-    - https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html
+  - https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html
 
 
 ### Run playbook on inventory servers 
@@ -71,8 +79,7 @@ ansible-playbook -i inventory.yml playbook.yml
 ```
 
 ### MULTILINE ROW REPLACE
-  LINK:
-    - https://www.middlewareinventory.com/blog/ansible-lineinfile-multiple-lines-replace-multiple-lines/
+  - https://www.middlewareinventory.com/blog/ansible-lineinfile-multiple-lines-replace-multiple-lines/
 ```
 ---
   - name: Examples of lineinfile
